@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>NOW SWING</title>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+
+        <script src="../js/jquery-2.2.4.min.js"></script>
+        <script src="../js/script.js"></script>
+        <!-- 무료 주소 검색 API (OpenStreetMap Nominatim) -->
+        <script>
+            // 🆓 완전 무료! OpenStreetMap Nominatim API를 사용한 주소 자동완성
+            let addressSearchTimeout;
+            let currentSuggestions = [];
+            let selectedIndex = -1;
+            
+            // 주소 자동완성 초기화
+            function initAddressAutocomplete() {
+                const addressInput = document.getElementById('address');
+                const suggestionsContainer = createSuggestionsContainer();
+                
+                if (!addressInput) return;
+                
+                // 입력 이벤트
+                addressInput.addEventListener('input', function(e) {
+                    const query = e.target.value.trim();
+                    
+                    if (query.length < 3) {
+                        hideSuggestions();
+                        return;
+                    }
+                    
+                    // 입력 중 딜레이를 위한 타이머
+                    clearTimeout(addressSearchTimeout);
+                    addressSearchTimeout = setTimeout(() => {
+                        searchAddresses(query);
+                    }, 300);
+                });
+                
+                // 키보드 네비게이션
+                addressInput.addEventListener('keydown', function(e) {
+                    const suggestions = suggestionsContainer.querySelectorAll('.address-suggestion');
+                    
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+                        updateSelection(suggestions);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        selectedIndex = Math.max(selectedIndex - 1, -1);
+                        updateSelection(suggestions);
+                    } else if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (selectedIndex >= 0 && suggestions[selectedIndex]) {
+                            selectAddress(currentSuggestions[selectedIndex]);
+                        }
+                    } else if (e.key === 'Escape') {
+                        hideSuggestions();
+                    }
+                });
+                
+                // 다른 곳 클릭 시 목록 숨기기
+                document.addEventListener('click', function(e) {
+                    if (!addressInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+                        hideSuggestions();
+                    }
+                });
+            }
+            
+            // 주소 검색 함수 (Nominatim API 사용)
+            async function searchAddresses(query) {
+                try {
+                    showLoading();
+                    
+                    // Nominatim API 호출 (무료!)
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&q=${encodeURIComponent(query)}`,
+                        {
+                            headers: {
+                                'User-Agent': 'GolfClubWebsite/1.0' // Nominatim 정책에 따른 User-Agent 설정
+                            }
+                        }
+                    );
+                    
+                    if (!response.ok) throw new Error('Address search failed');
+                    
+                    const data = await response.json();
+                    currentSuggestions = data;
+                    displaySuggestions(data);
+                    
+                } catch (error) {
+                    console.error('주소 검색 오류:', error);
+                    showError('주소 검색 중 오류가 발생했습니다.');
+                }
+            }
+            
+            // 자동완성 목록 컨테이너 생성
+            function createSuggestionsContainer() {
+                let container = document.getElementById('address-suggestions');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'address-suggestions';
+                    container.className = 'address-suggestions-container';
+                    document.getElementById('address').parentNode.appendChild(container);
+                }
+                return container;
+            }
+            
+            // 주소 목록 표시
+            function displaySuggestions(suggestions) {
+                const container = createSuggestionsContainer();
+                
+                if (suggestions.length === 0) {
+                    container.innerHTML = '<div class="no-suggestions">검색 결과가 없습니다.</div>';
+                    container.style.display = 'block';
+                    return;
+                }
+                
+                const html = suggestions.map((item, index) => `
+                    <div class="address-suggestion" data-index="${index}">
+                        <div class="suggestion-main">${item.display_name}</div>
+                        <div class="suggestion-type">${getAddressType(item.type)}</div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = html;
+                container.style.display = 'block';
+                selectedIndex = -1;
+                
+                // 클릭 이벤트 추가
+                container.querySelectorAll('.address-suggestion').forEach((elem, index) => {
+                    elem.addEventListener('click', () => selectAddress(suggestions[index]));
+                });
+            }
+            
+                         // 주소 선택
+             function selectAddress(addressData) {
+                 const addressInput = document.getElementById('address');
+                 addressInput.value = addressData.display_name;
+                 hideSuggestions();
+                 
+                 // jQuery 이벤트 트리거 (script.js와 연동)
+                 if (typeof $ !== 'undefined') {
+                     $(addressInput).trigger('addressSelected');
+                 }
+                 
+                 // 선택된 주소 데이터를 콘솔에 출력 (개발용)
+                 console.log('✅ 주소 선택됨:', addressData.display_name);
+             }
+            
+            // 키보드 선택 업데이트
+            function updateSelection(suggestions) {
+                suggestions.forEach((elem, index) => {
+                    elem.classList.toggle('selected', index === selectedIndex);
+                });
+            }
+            
+            // 목록 숨기기
+            function hideSuggestions() {
+                const container = document.getElementById('address-suggestions');
+                if (container) {
+                    container.style.display = 'none';
+                }
+                selectedIndex = -1;
+                currentSuggestions = [];
+            }
+            
+            // 로딩 표시
+            function showLoading() {
+                const container = createSuggestionsContainer();
+                container.innerHTML = '<div class="loading-suggestions">🔍 주소를 검색하는 중...</div>';
+                container.style.display = 'block';
+            }
+            
+            // 오류 표시
+            function showError(message) {
+                const container = createSuggestionsContainer();
+                container.innerHTML = `<div class="error-suggestions">❌ ${message}</div>`;
+                container.style.display = 'block';
+            }
+            
+            // 주소 타입 한국어 변환
+            function getAddressType(type) {
+                const typeMap = {
+                    'house': '건물',
+                    'road': '도로',
+                    'neighbourhood': '동네',
+                    'suburb': '구역',
+                    'city': '도시',
+                    'county': '군',
+                    'state': '주/도',
+                    'country': '국가'
+                };
+                return typeMap[type] || type;
+            }
+            
+            // 페이지 로드 시 초기화
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('🆓 무료 주소 검색 API 초기화 중...');
+                initAddressAutocomplete();
+                console.log('✅ 주소 자동완성 준비 완료!');
+            });
+        </script>
+    </head>
+    <body>
+
+        <div class="container">
+            <nav>
+                <div class="nav__top">
+                    <a href="../dashboard.html">
+                        <img src="../img/ico_home.svg" alt="홈">
+                    </a>
+                    <button class="btn-nav-menu">
+                        <img src="../img/ico_menu.svg" alt="메뉴">
+                    </button>
+                </div>
+                <div class="nav__btm">
+                    <ul class="nav__btm__list">
+                        <li>
+                            <a href="../dashboard.html" class="depth1 active">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.5 6.5V2.5C0.5 1.39543 1.39543 0.5 2.5 0.5H6.5C7.60457 0.5 8.5 1.39543 8.5 2.5V6.5C8.5 7.60457 7.60457 8.5 6.5 8.5H2.5C1.39543 8.5 0.5 7.60457 0.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 6.5V2.5C11.5 1.39543 12.3954 0.5 13.5 0.5H17.5C18.6046 0.5 19.5 1.39543 19.5 2.5V6.5C19.5 7.60457 18.6046 8.5 17.5 8.5H13.5C12.3954 8.5 11.5 7.60457 11.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M0.5 17.5V13.5C0.5 12.3954 1.39543 11.5 2.5 11.5H6.5C7.60457 11.5 8.5 12.3954 8.5 13.5V17.5C8.5 18.6046 7.60457 19.5 6.5 19.5H2.5C1.39543 19.5 0.5 18.6046 0.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 17.5V13.5C11.5 12.3954 12.3954 11.5 13.5 11.5H17.5C18.6046 11.5 19.5 12.3954 19.5 13.5V17.5C19.5 18.6046 18.6046 19.5 17.5 19.5H13.5C12.3954 19.5 11.5 18.6046 11.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.50004 19.5L2.5 4.5C2.5 3.39543 3.39543 2.5 4.5 2.5H19.5001C20.6046 2.5 21.5001 3.39543 21.5001 4.5L21.5001 19.5C21.5001 20.6046 20.6047 21.5 19.5001 21.5H4.50004C3.39547 21.5 2.50004 20.6046 2.50004 19.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.5 10C16.5 12.4853 14.4853 14.5 12 14.5C9.51472 14.5 7.5 12.4853 7.5 10C7.5 7.51472 9.51472 5.5 12 5.5C14.4853 5.5 16.5 7.51472 16.5 10Z" stroke="#0E1C36"/>
+                                    <path d="M4.51562 21.5C4.77292 17.591 8.0251 14.5 11.9992 14.5C15.9733 14.5 19.2255 17.591 19.4828 21.5" stroke="#0E1C36"/>
+                                </svg>
+                                <span>Staff</span>
+                                <img src="../img/arrow_up.svg" alt="arrow_up" class="depth1-arrow">
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="javascript:;">Staff01</a>
+                                <a href="javascript:;">Staff02</a>
+                                <a href="javascript:;">Staff03</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="nav__btm__logout">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.5 18.5C13.5 19.6046 12.6046 20.5 11.5 20.5H5.5C4.39543 20.5 3.5 19.6046 3.5 18.5V5.5C3.5 4.39543 4.39543 3.5 5.5 3.5H11.5C12.6046 3.5 13.5 4.39543 13.5 5.5M20.5 12L16.5 8.5M20.5 12L16.5 15.5M20.5 12H8.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="content__top">
+                    <div class="fake__select">
+                        <button>
+                            <img src="../img/flag_us.png" alt="english">
+                            <span>English</span>
+                            <img src="../img/arrow_up.svg" alt="arrow_down" class="select-arrow">
+                        </button>
+                    </div>
+                    <div class="user__info">
+                        <b class="username">Peter Parker</b>
+                        <button>
+                            <img src="../img/ico_setting.svg" alt="설정">
+                        </button>
+                    </div>
+                </div>
+                <div class="content__btm">
+                    <div class="content__box">
+                        <div class="page__dashboard_form">
+                            <a href="javascript:history.back()" class="btn-back">
+                                <img src="../img/ico_back.svg" alt="뒤로가기">
+                                <h2>Golf club information</h2>
+                            </a>
+                            <form action="">
+                                <div class="form-group__wrap">
+                                    <div class="form-group width-50">
+                                        <label for="golf-club-name">Golf club name <span class="required">*</span></label>
+                                        <input type="text" id="golf-club-name" name="golf-club-name" placeholder="Enter golf club name" maxlength="30">
+                                        <small class="char-counter">0/30 characters</small>
+                                    </div>
+                                    <div class="form-group width-50">
+                                        <label for="region">Region</label>
+                                        <select name="region" id="region">
+                                            <option value="">Select region</option>
+                                            <option value="seoul">Seoul</option>
+                                            <option value="gyeonggi">Gyeonggi</option>
+                                            <option value="incheon">Incheon</option>
+                                            <option value="gangwon">Gangwon</option>
+                                            <option value="chungbuk">Chungcheongbuk-do</option>
+                                            <option value="chungnam">Chungcheongnam-do</option>
+                                            <option value="sejong">Sejong</option>
+                                            <option value="daejeon">Daejeon</option>
+                                            <option value="jeonbuk">Jeollabuk-do</option>
+                                            <option value="jeonnam">Jeollanam-do</option>
+                                            <option value="gwangju">Gwangju</option>
+                                            <option value="gyeongbuk">Gyeongsangbuk-do</option>
+                                            <option value="gyeongnam">Gyeongsangnam-do</option>
+                                            <option value="daegu">Daegu</option>
+                                            <option value="ulsan">Ulsan</option>
+                                            <option value="busan">Busan</option>
+                                            <option value="jeju">Jeju</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label for="address">Address <span class="required">*</span></label>
+                                        <input type="text" id="address" name="address" placeholder="Start typing your address..." required autocomplete="off">
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label for="phone-number">Phone number <span class="required">*</span></label>
+                                        <div class="phone-number-wrap">
+                                            <select name="country-code" id="country-code" required>
+                                                <option value="">Select country</option>
+                                                <option value="+82">🇰🇷 +82 (South Korea)</option>
+                                                <option value="+1">🇺🇸 +1 (United States)</option>
+                                                <option value="+1">🇨🇦 +1 (Canada)</option>
+                                                <option value="+81">🇯🇵 +81 (Japan)</option>
+                                                <option value="+86">🇨🇳 +86 (China)</option>
+                                                <option value="+44">🇬🇧 +44 (United Kingdom)</option>
+                                                <option value="+33">🇫🇷 +33 (France)</option>
+                                                <option value="+49">🇩🇪 +49 (Germany)</option>
+                                                <option value="+39">🇮🇹 +39 (Italy)</option>
+                                                <option value="+34">🇪🇸 +34 (Spain)</option>
+                                                <option value="+61">🇦🇺 +61 (Australia)</option>
+                                                <option value="+65">🇸🇬 +65 (Singapore)</option>
+                                                <option value="+66">🇹🇭 +66 (Thailand)</option>
+                                                <option value="+84">🇻🇳 +84 (Vietnam)</option>
+                                                <option value="+60">🇲🇾 +60 (Malaysia)</option>
+                                                <option value="+62">🇮🇩 +62 (Indonesia)</option>
+                                                <option value="+63">🇵🇭 +63 (Philippines)</option>
+                                                <option value="+91">🇮🇳 +91 (India)</option>
+                                            </select>
+                                            <input type="tel" id="phone-number" name="phone-number" placeholder="Enter phone number" required maxlength="15" autocomplete="tel">
+                                        </div>
+                                        <div class="phone-format-info">
+                                            <small id="phone-format-guide">Please enter numbers only (e.g., 01012345678)</small>
+                                        </div>
+                                        <div class="phone-validation-feedback"></div>
+                                    </div>
+
+                                    <!-- 여기부터터 -->
+                                    <div class="form-group width-100">
+                                        <label>Operating type <span class="required">*</span></label>
+                                        <div class="operating-type-wrap">
+                                            <div class="operating-type-tags">
+                                                <button type="button" class="operating-type-tag" data-value="member-only">Member only</button>
+                                                <button type="button" class="operating-type-tag" data-value="public">Public</button>
+                                                <button type="button" class="operating-type-tag" data-value="semi-private">Semi-private</button>
+                                                <button type="button" class="operating-type-tag" data-value="resort">Resort</button>
+                                                <button type="button" class="operating-type-tag" data-value="daily-fee">Daily fee</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label for="operating-hours">Operating hours <span class="required">*</span></label>
+                                        <div class="operating-hours-wrap">
+                                            <button type="button" class="btn-hours active">24 hours</button>
+                                            <button type="button" class="btn-hours">Specific hours</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label for="image">Image <span class="required">*</span></label>
+                                        <div class="image-upload-wrap">
+                                            <div class="image-upload-box" id="imageUploadBox">
+                                                <img src="../img/image_add.svg" alt="image_add">
+                                            </div>
+                                            <p class="upload-info">
+                                                <img src="../img/ico_important.svg" alt="image_upload">
+                                                <span>Upload up to 10 images (0/10)</span>
+                                            </p>
+                                        </div>
+                                        <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                                            <!-- 업로드된 이미지들이 여기에 표시됩니다 -->
+                                        </div>
+
+                                        <input type="file" id="imageInput" accept=".jpg,.jpeg,.png,.webp" multiple style="display: none;">
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label for="open-since">Open since <span class="required">*</span></label>
+                                        <select name="open-since" id="open-since">
+                                            <option value="2025" selected>2025</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label>Amenities <span class="required">*</span></label>
+                                        <div class="amenities-wrap">
+                                            <div class="amenity-tags">
+                                                <button type="button" class="amenity-tag active">Restaurant/Cafe</button>
+                                                <button type="button" class="amenity-tag">Wine bar</button>
+                                                <button type="button" class="amenity-tag">Lounge</button>
+                                                <button type="button" class="amenity-tag">Locker room</button>
+                                                <button type="button" class="amenity-tag">Shower room</button>
+                                                <button type="button" class="amenity-tag">Sauna</button>
+                                                <button type="button" class="amenity-tag">Spa</button>
+                                                <button type="button" class="amenity-tag">Kids zone</button>
+                                                <button type="button" class="amenity-tag">Shopping</button>
+                                                <button type="button" class="amenity-tag">Practice range</button>
+                                                <button type="button" class="amenity-tag">Waiting room</button>
+                                                <button type="button" class="amenity-tag">Conference room</button>
+                                                <button type="button" class="amenity-tag">Waiting room</button>
+                                            </div>
+                                            <input type="text" placeholder="Enter other amenities" class="other-amenities">
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-50">
+                                        <label for="number-of-courses">Number of courses <span class="required">*</span></label>
+                                        <input type="number" id="number-of-courses" name="number-of-courses" placeholder="Enter number of courses" min="1" max="99">
+                                    </div>
+                                    <div class="form-group width-50">
+                                        <label for="designed-by">Designed by</label>
+                                        <input type="text" id="designed-by" name="designed-by" placeholder="Enter designer name" maxlength="30">
+                                        <small class="char-counter">0/30 characters</small>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label>Cart <span class="required">*</span></label>
+                                        <div class="cart-caddie-wrap">
+                                            <div class="toggle-section">
+                                                <label class="toggle-label">Available</label>
+                                                <div class="toggle-switch">
+                                                    <input type="checkbox" id="cart-available" name="cart-available">
+                                                    <span class="toggle-slider"></span>
+                                                </div>
+                                            </div>
+                                            <div class="additional-fee-section" id="cart-fee-section" style="display: none;">
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" id="cart-additional-fee" name="cart-additional-fee">
+                                                    <span class="checkmark"></span>
+                                                    Additional fee required
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label>Caddie <span class="required">*</span></label>
+                                        <div class="cart-caddie-wrap">
+                                            <div class="toggle-section">
+                                                <label class="toggle-label">Available</label>
+                                                <div class="toggle-switch">
+                                                    <input type="checkbox" id="caddie-available" name="caddie-available">
+                                                    <span class="toggle-slider"></span>
+                                                </div>
+                                            </div>
+                                            <div class="additional-fee-section" id="caddie-fee-section" style="display: none;">
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" id="caddie-additional-fee" name="caddie-additional-fee">
+                                                    <span class="checkmark"></span>
+                                                    Additional fee required
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label>Location</label>
+                                        <div class="location-wrap">
+                                            <div class="location-tags">
+                                                <button type="button" class="location-tag" data-value="downtown">Near downtown</button>
+                                                <button type="button" class="location-tag" data-value="mountain">Near mountain</button>
+                                                <button type="button" class="location-tag" data-value="ocean">Near ocean</button>
+                                                <button type="button" class="location-tag" data-value="lakeside">Lakeside</button>
+                                                <button type="button" class="location-tag" data-value="countryside">Countryside</button>
+                                                <button type="button" class="location-tag" data-value="resort">Resort area</button>
+                                            </div>
+                                            <input type="text" placeholder="Enter other location details" class="other-location">
+                                        </div>
+                                    </div>
+                                    <div class="form-group width-100">
+                                        <label>Tournament history</label>
+                                        <div class="tournament-wrap">
+                                            <div class="tournament-item">
+                                                <select name="tournament-year" class="tournament-year">
+                                                    <option value="">Select an year</option>
+                                                    <option value="2024">2024</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2022">2022</option>
+                                                </select>
+                                                <input type="text" placeholder="Enter a tournament name" class="tournament-name">
+                                                <button type="button" class="btn-remove-tournament">
+                                                    <svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M0.849609 1H7.99961H15.1496" stroke="#CFD2D7" stroke-linecap="round"/>
+                                                    </svg>
+                                                </button>
+                                                <button type="button" class="btn-add-tournament" onclick="onclickAddTournament()">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.99961 7.99961V0.849609M7.99961 7.99961H0.849609M7.99961 7.99961V15.1496M7.99961 7.99961H15.1496" stroke="#286BB7" stroke-linecap="round"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-submit">
+                                    <button type="submit" class="btn-create-golf-club">Create golf club</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .container -->
+    </body>
+</html>

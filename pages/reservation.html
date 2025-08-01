@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>NOW SWING</title>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+
+        <script src="../js/jquery-2.2.4.min.js"></script>
+        <script src="../js/script.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <nav>
+                <div class="nav__top">
+                    <a href="../dashboard.html">
+                        <img src="../img/ico_home.svg" alt="홈">
+                    </a>
+                    <button class="btn-nav-menu">
+                        <img src="../img/ico_menu.svg" alt="메뉴">
+                    </button>
+                </div>
+                <div class="nav__btm">
+                    <div class="nav__profile">
+                        <div class="userinfo">
+                            <img src="../img/profile.png" alt="profile">
+                            <div class="userinfo__text">
+                                <b>Klaus Golf Club 1</b>
+                                <p>CEO</p>
+                            </div>
+                        </div>
+                        <button class="btn-nav-profile">
+                            <img src="../img/ico_setting.svg" alt="설정">
+                        </button>
+                    </div>
+                    <ul class="nav__btm__list">
+                        <li>
+                            <a href="../dashboard.html" class="depth1 ">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-icon">
+                                    <path d="M0.5 6.5V2.5C0.5 1.39543 1.39543 0.5 2.5 0.5H6.5C7.60457 0.5 8.5 1.39543 8.5 2.5V6.5C8.5 7.60457 7.60457 8.5 6.5 8.5H2.5C1.39543 8.5 0.5 7.60457 0.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 6.5V2.5C11.5 1.39543 12.3954 0.5 13.5 0.5H17.5C18.6046 0.5 19.5 1.39543 19.5 2.5V6.5C19.5 7.60457 18.6046 8.5 17.5 8.5H13.5C12.3954 8.5 11.5 7.60457 11.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M0.5 17.5V13.5C0.5 12.3954 1.39543 11.5 2.5 11.5H6.5C7.60457 11.5 8.5 12.3954 8.5 13.5V17.5C8.5 18.6046 7.60457 19.5 6.5 19.5H2.5C1.39543 19.5 0.5 18.6046 0.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 17.5V13.5C11.5 12.3954 12.3954 11.5 13.5 11.5H17.5C18.6046 11.5 19.5 12.3954 19.5 13.5V17.5C19.5 18.6046 18.6046 19.5 17.5 19.5H13.5C12.3954 19.5 11.5 18.6046 11.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-icon">
+                                    <path d="M13.5 2.5H4.5C3.39543 2.5 2.5 3.39543 2.5 4.5V19.5C2.5 20.6046 3.39543 21.5 4.5 21.5H19.5C20.6046 21.5 21.5 20.6046 21.5 19.5V10.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 18.5C5 18.2239 5.22386 18 5.5 18H18.5C18.7761 18 19 18.2239 19 18.5C19 18.7761 18.7761 19 18.5 19H5.5C5.22386 19 5 18.7761 5 18.5Z" fill="#0E1C36"/>
+                                    <path d="M5 15.5C5 15.2239 5.22386 15 5.5 15H7.5C7.77614 15 8 15.2239 8 15.5C8 15.7761 7.77614 16 7.5 16H5.5C5.22386 16 5 15.7761 5 15.5Z" fill="#0E1C36"/>
+                                    <path d="M14 15.5C14 15.2239 14.2239 15 14.5 15H18.5C18.7761 15 19 15.2239 19 15.5C19 15.7761 18.7761 16 18.5 16H14.5C14.2239 16 14 15.7761 14 15.5Z" fill="#0E1C36"/>
+                                    <path d="M17 12.5C17 12.2239 17.2239 12 17.5 12H18.5C18.7761 12 19 12.2239 19 12.5C19 12.7761 18.7761 13 18.5 13H17.5C17.2239 13 17 12.7761 17 12.5Z" fill="#0E1C36"/>
+                                    <path d="M5 12.5C5 12.2239 5.22386 12 5.5 12H6.5C6.77614 12 7 12.2239 7 12.5C7 12.7761 6.77614 13 6.5 13H5.5C5.22386 13 5 12.7761 5 12.5Z" fill="#0E1C36"/>
+                                    <path d="M5 9.5C5 9.22386 5.22386 9 5.5 9H8.5C8.77614 9 9 9.22386 9 9.5C9 9.77614 8.77614 10 8.5 10H5.5C5.22386 10 5 9.77614 5 9.5Z" fill="#0E1C36"/>
+                                    <path d="M5 6.5C5 6.22386 5.22386 6 5.5 6H10.5C10.7761 6 11 6.22386 11 6.5C11 6.77614 10.7761 7 10.5 7H5.5C5.22386 7 5 6.77614 5 6.5Z" fill="#0E1C36"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7996 3.72068C17.7605 2.75977 19.3184 2.75977 20.2793 3.72068C21.2402 4.68158 21.2402 6.23952 20.2793 7.20042L13.3198 14.1599C13.2511 14.2286 13.1636 14.2754 13.0684 14.2945L9.58863 14.9904C9.42729 15.0227 9.26049 14.9722 9.14414 14.8559C9.0278 14.7395 8.9773 14.5727 9.00956 14.4114L9.70551 10.9316C9.72457 10.8364 9.77139 10.7489 9.84009 10.6802L16.7996 3.72068ZM19.5834 4.41663C19.0068 3.84008 18.0721 3.84008 17.4955 4.41663L17.1476 4.7646L19.2354 6.85245L19.5834 6.50447C20.1599 5.92793 20.1599 4.99317 19.5834 4.41663ZM18.5394 7.5484L16.4516 5.46055L10.884 11.0281L12.9719 13.116L18.5394 7.5484ZM11.9737 13.5097L10.4903 12.0263L10.1194 13.8806L11.9737 13.5097Z" fill="#0E1C36"/>
+                                </svg>
+                                <span>Management</span>
+                                <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-arrow">
+                                    <path d="M11.5 5.5L6 0.5L0.5 5.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="./courseinfo.html" class="">Course info</a>
+                                <a href="./teetime.html">Tee time</a>
+                                <a href="./pricing.html">Pricing</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1 active">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-icon">
+                                    <path d="M5.50011 2.49967H4.50006C3.3955 2.49967 2.50008 3.39508 2.50006 4.49964L2.5 7.5M5.50011 2.49967V1.5M5.50011 2.49967H18.5001M5.50011 2.49967V4.5M18.5001 2.49967H19.5001C20.6047 2.49967 21.5001 3.39512 21.5001 4.49971L21.5 7.5M18.5001 2.49967V1.5M18.5001 2.49967V4.5M2.5 7.5V19.5C2.5 20.6046 3.39543 21.5 4.5 21.5H19.5C20.6046 21.5 21.5 20.6046 21.5 19.5V7.5M2.5 7.5H21.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <rect x="10" y="12" width="5" height="1" rx="0.5" fill="#0E1C36"/>
+                                    <rect x="10" y="10" width="9" height="1" rx="0.5" fill="#0E1C36"/>
+                                    <rect x="10" y="15" width="8" height="1" rx="0.5" fill="#0E1C36"/>
+                                    <rect x="10" y="17" width="4" height="1" rx="0.5" fill="#0E1C36"/>
+                                    <path d="M5.5 13.5V10.5H8.5V13.5H5.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5.5 18.5001V15.5L8.5 15.5V18.5L5.5 18.5001Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Reservation</span>
+                                <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-arrow">
+                                    <path d="M11.5 5.5L6 0.5L0.5 5.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="./analysis.html">Analysis</a>
+                                <a href="./calendar.html">Calendar</a>
+                                <a href="./teetimetable.html">Tee time table</a>
+                                <a href="./reservation.html" class="active">Reservation list</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1 ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-icon">
+                                    <path d="M1.49996 7L1.49999 5.99994C1.50002 4.89539 2.39544 4 3.49999 4H20.4999C21.6045 4 22.4999 4.89546 22.4999 6.00005L22.4999 7M1.49996 7H22.4999M1.49996 7L1.49973 18C1.49973 19.1046 2.39516 20 3.49973 20H20.4996C21.6042 20 22.4996 19.1046 22.4996 18L22.4999 7M8.00031 14.4999C8.82874 14.4999 9.50031 13.8284 9.50031 12.9999C9.50031 12.1715 8.82874 11.4999 8.00031 11.4999C7.17188 11.4999 6.50031 12.1715 6.50031 12.9999C6.50031 13.8284 7.17188 14.4999 8.00031 14.4999ZM8.00031 14.4999C6.77522 14.4999 5.72126 15.2833 5.25278 16.407M8.00031 14.4999C9.2254 14.4999 10.2794 15.2833 10.7478 16.407M5.25278 16.407C4.48153 15.6779 4.00032 14.6451 4.00032 13.5C4.00031 11.2908 5.79117 9.49995 8.00031 9.49995C10.2094 9.49995 12.0003 11.2908 12.0003 13.4999C12.0003 14.6451 11.5191 15.6779 10.7478 16.407M5.25278 16.407C5.96936 17.0845 6.93632 17.4999 8.00031 17.4999C9.0643 17.4999 10.0313 17.0845 10.7478 16.407M14.5001 11L20 10.9999M14.5001 13.5L18 13.4999M14.5001 16.0001L19 16" stroke="#0E1C36" stroke-linecap="round"/>
+                                </svg>
+                                <span>Customer</span>
+                                <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-arrow">
+                                    <path d="M11.5 5.5L6 0.5L0.5 5.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="javascript:;" class="active">Course info</a>
+                                <a href="javascript:;">Tee time</a>
+                                <a href="javascript:;">Pricing</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="depth1-icon">
+                                    <path d="M2.50004 19.5L2.5 4.5C2.5 3.39543 3.39543 2.5 4.5 2.5H19.5001C20.6046 2.5 21.5001 3.39543 21.5001 4.5L21.5001 19.5C21.5001 20.6046 20.6047 21.5 19.5001 21.5H4.50004C3.39547 21.5 2.50004 20.6046 2.50004 19.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.5 10C16.5 12.4853 14.4853 14.5 12 14.5C9.51472 14.5 7.5 12.4853 7.5 10C7.5 7.51472 9.51472 5.5 12 5.5C14.4853 5.5 16.5 7.51472 16.5 10Z" stroke="#0E1C36"/>
+                                    <path d="M4.51562 21.5C4.77292 17.591 8.0251 14.5 11.9992 14.5C15.9733 14.5 19.2255 17.591 19.4828 21.5" stroke="#0E1C36"/>
+                                </svg>
+                                <span>Staff</span>
+                                <img src="../img/arrow_up.svg" alt="arrow_up" class="depth1-arrow">
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="javascript:;">Customer01</a>
+                                <a href="javascript:;">Customer02</a>
+                                <a href="javascript:;">Customer03</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="nav__btm__logout">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.5 18.5C13.5 19.6046 12.6046 20.5 11.5 20.5H5.5C4.39543 20.5 3.5 19.6046 3.5 18.5V5.5C3.5 4.39543 4.39543 3.5 5.5 3.5H11.5C12.6046 3.5 13.5 4.39543 13.5 5.5M20.5 12L16.5 8.5M20.5 12L16.5 15.5M20.5 12H8.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="content__top">
+                    <div class="fake__select">
+                        <button>
+                            <img src="../img/flag_us.png" alt="english">
+                            <span>English</span>
+                            <img src="../img/arrow_up.svg" alt="arrow_down" class="select-arrow">
+                        </button>
+                    </div>
+                    <div class="user__info">
+                        <b class="username">Peter Parker</b>
+                        <button>
+                            <img src="../img/ico_setting.svg" alt="설정">
+                        </button>
+                    </div>
+                </div>
+                <div class="content__btm">
+                    <div class="content__box">
+                        <h2 class="content__title">Reservation</h2>
+                        
+                        <!-- Search Section -->
+                        <div class="reservation-search-section">
+                            <div class="search-row">
+                                <div class="search-group">
+                                    <label class="search-label">Search</label>
+                                    <div class="input-with-icon">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon">
+                                            <path d="M8.25 1.5C4.52208 1.5 1.5 4.52208 1.5 8.25C1.5 11.9779 4.52208 15 8.25 15C9.85082 15 11.3181 14.4238 12.4713 13.4713L15.75 16.75M8.25 1.5C11.9779 1.5 15 4.52208 15 8.25C15 9.85082 14.4238 11.3181 13.4713 12.4713L16.75 15.75" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <input type="text" placeholder="ID, Name, mobile or email" class="search-input">
+                                    </div>
+                                </div>
+                                <div class="search-group">
+                                    <label class="search-label">Date</label>
+                                    <div class="date-range-wrap">
+                                        <div class="date-input-wrap">
+                                            <input type="text" placeholder="Start" class="date-input">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="calendar-icon">
+                                                <path d="M4.5 1.5V3M13.5 1.5V3M2.25 6H15.75M3.75 3H14.25C15.0784 3 15.75 3.67157 15.75 4.5V15C15.75 15.8284 15.0784 16.5 14.25 16.5H3.75C2.92157 16.5 2.25 15.8284 2.25 15V4.5C2.25 3.67157 2.92157 3 3.75 3Z" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <div class="date-input-wrap">
+                                            <input type="text" placeholder="End" class="date-input">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="calendar-icon">
+                                                <path d="M4.5 1.5V3M13.5 1.5V3M2.25 6H15.75M3.75 3H14.25C15.0784 3 15.75 3.67157 15.75 4.5V15C15.75 15.8284 15.0784 16.5 14.25 16.5H3.75C2.92157 16.5 2.25 15.8284 2.25 15V4.5C2.25 3.67157 2.92157 3 3.75 3Z" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="search-buttons">
+                                    <button class="btn-search">Search</button>
+                                    <button class="btn-reset">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Section -->
+                        <div class="reservation-filter-section">
+                            <div class="filter-group">
+                                <label class="filter-label">Status</label>
+                                <select class="filter-select">
+                                    <option value="all">All</option>
+                                    <option value="reserved">Reserved</option>
+                                    <option value="checked-in">Checked in</option>
+                                    <option value="no-show">No show</option>
+                                    <option value="finished">Finished</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label">Reserved on</label>
+                                <select class="filter-select">
+                                    <option value="all">All</option>
+                                    <option value="app">App</option>
+                                    <option value="call">Call</option>
+                                    <option value="os">OS</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label">Course</label>
+                                <select class="filter-select">
+                                    <option value="all">All</option>
+                                    <option value="course1">Course 1</option>
+                                    <option value="course2">Course 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Reservation Table -->
+                        <div class="course-table-wrap">
+                            <table class="course-table">
+                                <thead>
+                                    <tr>
+                                        <th class="id-col">ID</th>
+                                        <th class="date-col sortable">
+                                            Date
+                                            <img src="../img/sort.png" alt="sort" class="sort-icon">
+                                        </th>
+                                        <th class="name-col">Name</th>
+                                        <th class="email-col">Email</th>
+                                        <th class="course-col">Course</th>
+                                        <th class="status-col">Status</th>
+                                        <th class="reserved-on-col">Reserved on</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="id-col">
+                                            <a href="javascript:;" class="course-link">2HW2506...</a>
+                                        </td>
+                                        <td class="date-col">2025.05.30</td>
+                                        <td class="name-col">Peter Parker</td>
+                                        <td class="email-col">peterparker...</td>
+                                        <td class="course-col">Course 1</td>
+                                        <td class="status-col">
+                                            <span class="status-badge reserved">
+                                                <span class="status-dot"></span>
+                                                Reserved
+                                            </span>
+                                        </td>
+                                        <td class="reserved-on-col">App</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id-col">
+                                            <a href="javascript:;" class="course-link">250481023</a>
+                                        </td>
+                                        <td class="date-col">2025.05.28</td>
+                                        <td class="name-col">Taegyun Han</td>
+                                        <td class="email-col">taegyunhan...</td>
+                                        <td class="course-col">Course 2</td>
+                                        <td class="status-col">
+                                            <span class="status-badge checked-in">
+                                                <span class="status-dot"></span>
+                                                Checked in
+                                            </span>
+                                        </td>
+                                        <td class="reserved-on-col">Call</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id-col">
+                                            <a href="javascript:;" class="course-link">250481015</a>
+                                        </td>
+                                        <td class="date-col">2025.05.22</td>
+                                        <td class="name-col">Junhyeong...</td>
+                                        <td class="email-col">jhbak@gma...</td>
+                                        <td class="course-col">Course 2</td>
+                                        <td class="status-col">
+                                            <span class="status-badge no-show">
+                                                <span class="status-dot"></span>
+                                                No show
+                                            </span>
+                                        </td>
+                                        <td class="reserved-on-col">OS</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id-col">
+                                            <a href="javascript:;" class="course-link">250481008</a>
+                                        </td>
+                                        <td class="date-col">2025.05.11</td>
+                                        <td class="name-col">Hwagyeon...</td>
+                                        <td class="email-col">hwagyeong...</td>
+                                        <td class="course-col">Course 1</td>
+                                        <td class="status-col">
+                                            <span class="status-badge finished">
+                                                <span class="status-dot"></span>
+                                                Finished
+                                            </span>
+                                        </td>
+                                        <td class="reserved-on-col">OS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- .container -->
+    </body>
+</html>

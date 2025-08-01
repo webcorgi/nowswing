@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>NOW SWING</title>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+
+        <script src="../js/jquery-2.2.4.min.js"></script>
+        <script src="../js/script.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <nav>
+                <div class="nav__top">
+                    <a href="../dashboard.html">
+                        <img src="../img/ico_home.svg" alt="홈">
+                    </a>
+                    <button class="btn-nav-menu">
+                        <img src="../img/ico_menu.svg" alt="메뉴">
+                    </button>
+                </div>
+                <div class="nav__btm">
+                    <ul class="nav__btm__list">
+                        <li>
+                            <a href="../dashboard.html" class="depth1 active">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.5 6.5V2.5C0.5 1.39543 1.39543 0.5 2.5 0.5H6.5C7.60457 0.5 8.5 1.39543 8.5 2.5V6.5C8.5 7.60457 7.60457 8.5 6.5 8.5H2.5C1.39543 8.5 0.5 7.60457 0.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 6.5V2.5C11.5 1.39543 12.3954 0.5 13.5 0.5H17.5C18.6046 0.5 19.5 1.39543 19.5 2.5V6.5C19.5 7.60457 18.6046 8.5 17.5 8.5H13.5C12.3954 8.5 11.5 7.60457 11.5 6.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M0.5 17.5V13.5C0.5 12.3954 1.39543 11.5 2.5 11.5H6.5C7.60457 11.5 8.5 12.3954 8.5 13.5V17.5C8.5 18.6046 7.60457 19.5 6.5 19.5H2.5C1.39543 19.5 0.5 18.6046 0.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.5 17.5V13.5C11.5 12.3954 12.3954 11.5 13.5 11.5H17.5C18.6046 11.5 19.5 12.3954 19.5 13.5V17.5C19.5 18.6046 18.6046 19.5 17.5 19.5H13.5C12.3954 19.5 11.5 18.6046 11.5 17.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="depth1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.50004 19.5L2.5 4.5C2.5 3.39543 3.39543 2.5 4.5 2.5H19.5001C20.6046 2.5 21.5001 3.39543 21.5001 4.5L21.5001 19.5C21.5001 20.6046 20.6047 21.5 19.5001 21.5H4.50004C3.39547 21.5 2.50004 20.6046 2.50004 19.5Z" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.5 10C16.5 12.4853 14.4853 14.5 12 14.5C9.51472 14.5 7.5 12.4853 7.5 10C7.5 7.51472 9.51472 5.5 12 5.5C14.4853 5.5 16.5 7.51472 16.5 10Z" stroke="#0E1C36"/>
+                                    <path d="M4.51562 21.5C4.77292 17.591 8.0251 14.5 11.9992 14.5C15.9733 14.5 19.2255 17.591 19.4828 21.5" stroke="#0E1C36"/>
+                                </svg>
+                                <span>Staff</span>
+                                <img src="../img/arrow_up.svg" alt="arrow_up" class="depth1-arrow">
+                            </a>
+                            <div class="depth2__wrap">
+                                <a href="javascript:;">Staff01</a>
+                                <a href="javascript:;">Staff02</a>
+                                <a href="javascript:;">Staff03</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="nav__btm__logout">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.5 18.5C13.5 19.6046 12.6046 20.5 11.5 20.5H5.5C4.39543 20.5 3.5 19.6046 3.5 18.5V5.5C3.5 4.39543 4.39543 3.5 5.5 3.5H11.5C12.6046 3.5 13.5 4.39543 13.5 5.5M20.5 12L16.5 8.5M20.5 12L16.5 15.5M20.5 12H8.5" stroke="#0E1C36" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="content__top">
+                    <div class="fake__select">
+                        <button>
+                            <img src="../img/flag_us.png" alt="english">
+                            <span>English</span>
+                            <img src="../img/arrow_up.svg" alt="arrow_down" class="select-arrow">
+                        </button>
+                    </div>
+                    <div class="user__info">
+                        <b class="username">Peter Parker</b>
+                        <button>
+                            <img src="../img/ico_setting.svg" alt="설정">
+                        </button>
+                    </div>
+                </div>
+                <div class="content__btm">
+                    <div class="content__box page__dashboard">
+                        <img src="../img/logo_nowswing.png" alt="nowswing" class="logo__nowswing">
+                        <h2>Choose a golf club</h2>
+                        <button class="btn-add-golf-club">+ Add a new golf club</button>
+
+                        <div class="golf-club__list">
+                            <div class="golf-club__item">
+                                <div class="golf-club__item__top">
+                                    <img src="../img/img_item.png" alt="nowswing">
+                                </div>
+                                <div class="golf-club__item__btm">
+                                    <h3>Now Swing Golf Club & Resort</h3>
+                                    <p>South Korea</p>
+                                    <span>General Manager</span>
+                                    <div class="bell-icon-wrap">
+                                    <button class="btn-bell-icon">
+                                            <span class="dot"></span>
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5 16.9209H3.5H3.3541C2.33011 16.9209 1.5 16.0734 1.5 15.0494V15.0494C1.5 14.3642 1.88713 13.7273 2.5 13.4209V13.4209C3.11287 13.1145 3.5 12.4881 3.5 11.8029V7.9209C3.5 5.15947 5.73858 2.9209 8.5 2.9209V2.9209M6.5 16.9209L6.5068 16.9617C6.79141 18.6693 8.26883 19.9209 10 19.9209V19.9209C11.7312 19.9209 13.2086 18.6693 13.4932 16.9617L13.5 16.9209M6.5 16.9209H13.5M13.5 16.9209H16.5H16.6459C17.6699 16.9209 18.5 16.0734 18.5 15.0494V15.0494C18.5 14.3642 18.1129 13.7273 17.5 13.4209V13.4209C16.8871 13.1145 16.5 12.4881 16.5 11.8029V7.9209C16.5 5.15947 14.2614 2.9209 11.5 2.9209V2.9209M8.5 2.9209V2.4209C8.5 1.59247 9.17157 0.920898 10 0.920898V0.920898C10.8284 0.920898 11.5 1.59247 11.5 2.4209V2.9209M8.5 2.9209H11.5" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="golf-club__item">
+                                <div class="golf-club__item__top">
+                                    <img src="../img/img_item.png" alt="nowswing">
+                                </div>
+                                <div class="golf-club__item__btm">
+                                    <h3>Now Swing Golf Club & Resort</h3>
+                                    <p>South Korea</p>
+                                    <span>General Manager</span>
+                                    <div class="bell-icon-wrap">
+                                    <button class="btn-bell-icon">
+                                            <span class="dot"></span>
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5 16.9209H3.5H3.3541C2.33011 16.9209 1.5 16.0734 1.5 15.0494V15.0494C1.5 14.3642 1.88713 13.7273 2.5 13.4209V13.4209C3.11287 13.1145 3.5 12.4881 3.5 11.8029V7.9209C3.5 5.15947 5.73858 2.9209 8.5 2.9209V2.9209M6.5 16.9209L6.5068 16.9617C6.79141 18.6693 8.26883 19.9209 10 19.9209V19.9209C11.7312 19.9209 13.2086 18.6693 13.4932 16.9617L13.5 16.9209M6.5 16.9209H13.5M13.5 16.9209H16.5H16.6459C17.6699 16.9209 18.5 16.0734 18.5 15.0494V15.0494C18.5 14.3642 18.1129 13.7273 17.5 13.4209V13.4209C16.8871 13.1145 16.5 12.4881 16.5 11.8029V7.9209C16.5 5.15947 14.2614 2.9209 11.5 2.9209V2.9209M8.5 2.9209V2.4209C8.5 1.59247 9.17157 0.920898 10 0.920898V0.920898C10.8284 0.920898 11.5 1.59247 11.5 2.4209V2.9209M8.5 2.9209H11.5" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="golf-club__item">
+                                <div class="golf-club__item__top">
+                                    <img src="../img/img_item.png" alt="nowswing">
+                                </div>
+                                <div class="golf-club__item__btm">
+                                    <h3>Now Swing Golf Club & Resort</h3>
+                                    <p>South Korea</p>
+                                    <span>General Manager</span>
+                                    <div class="bell-icon-wrap">
+                                    <button class="btn-bell-icon">
+                                            <span class="dot"></span>
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5 16.9209H3.5H3.3541C2.33011 16.9209 1.5 16.0734 1.5 15.0494V15.0494C1.5 14.3642 1.88713 13.7273 2.5 13.4209V13.4209C3.11287 13.1145 3.5 12.4881 3.5 11.8029V7.9209C3.5 5.15947 5.73858 2.9209 8.5 2.9209V2.9209M6.5 16.9209L6.5068 16.9617C6.79141 18.6693 8.26883 19.9209 10 19.9209V19.9209C11.7312 19.9209 13.2086 18.6693 13.4932 16.9617L13.5 16.9209M6.5 16.9209H13.5M13.5 16.9209H16.5H16.6459C17.6699 16.9209 18.5 16.0734 18.5 15.0494V15.0494C18.5 14.3642 18.1129 13.7273 17.5 13.4209V13.4209C16.8871 13.1145 16.5 12.4881 16.5 11.8029V7.9209C16.5 5.15947 14.2614 2.9209 11.5 2.9209V2.9209M8.5 2.9209V2.4209C8.5 1.59247 9.17157 0.920898 10 0.920898V0.920898C10.8284 0.920898 11.5 1.59247 11.5 2.4209V2.9209M8.5 2.9209H11.5" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="golf-club__item">
+                                <div class="golf-club__item__top">
+                                    <img src="../img/img_item.png" alt="nowswing">
+                                </div>
+                                <div class="golf-club__item__btm">
+                                    <h3>Now Swing Golf Club & Resort</h3>
+                                    <p>South Korea</p>
+                                    <span>General Manager</span>
+                                    <div class="bell-icon-wrap">
+                                    <button class="btn-bell-icon">
+                                            <span class="dot"></span>
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5 16.9209H3.5H3.3541C2.33011 16.9209 1.5 16.0734 1.5 15.0494V15.0494C1.5 14.3642 1.88713 13.7273 2.5 13.4209V13.4209C3.11287 13.1145 3.5 12.4881 3.5 11.8029V7.9209C3.5 5.15947 5.73858 2.9209 8.5 2.9209V2.9209M6.5 16.9209L6.5068 16.9617C6.79141 18.6693 8.26883 19.9209 10 19.9209V19.9209C11.7312 19.9209 13.2086 18.6693 13.4932 16.9617L13.5 16.9209M6.5 16.9209H13.5M13.5 16.9209H16.5H16.6459C17.6699 16.9209 18.5 16.0734 18.5 15.0494V15.0494C18.5 14.3642 18.1129 13.7273 17.5 13.4209V13.4209C16.8871 13.1145 16.5 12.4881 16.5 11.8029V7.9209C16.5 5.15947 14.2614 2.9209 11.5 2.9209V2.9209M8.5 2.9209V2.4209C8.5 1.59247 9.17157 0.920898 10 0.920898V0.920898C10.8284 0.920898 11.5 1.59247 11.5 2.4209V2.9209M8.5 2.9209H11.5" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="golf-club__item">
+                                <div class="golf-club__item__top">
+                                    <img src="../img/img_item.png" alt="nowswing">
+                                </div>
+                                <div class="golf-club__item__btm">
+                                    <h3>Now Swing Golf Club & Resort</h3>
+                                    <p>South Korea</p>
+                                    <span>General Manager</span>
+                                    <div class="bell-icon-wrap">
+                                    <button class="btn-bell-icon">
+                                            <span class="dot"></span>
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5 16.9209H3.5H3.3541C2.33011 16.9209 1.5 16.0734 1.5 15.0494V15.0494C1.5 14.3642 1.88713 13.7273 2.5 13.4209V13.4209C3.11287 13.1145 3.5 12.4881 3.5 11.8029V7.9209C3.5 5.15947 5.73858 2.9209 8.5 2.9209V2.9209M6.5 16.9209L6.5068 16.9617C6.79141 18.6693 8.26883 19.9209 10 19.9209V19.9209C11.7312 19.9209 13.2086 18.6693 13.4932 16.9617L13.5 16.9209M6.5 16.9209H13.5M13.5 16.9209H16.5H16.6459C17.6699 16.9209 18.5 16.0734 18.5 15.0494V15.0494C18.5 14.3642 18.1129 13.7273 17.5 13.4209V13.4209C16.8871 13.1145 16.5 12.4881 16.5 11.8029V7.9209C16.5 5.15947 14.2614 2.9209 11.5 2.9209V2.9209M8.5 2.9209V2.4209C8.5 1.59247 9.17157 0.920898 10 0.920898V0.920898C10.8284 0.920898 11.5 1.59247 11.5 2.4209V2.9209M8.5 2.9209H11.5" stroke="#0E1C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .container -->
+    </body>
+</html>
