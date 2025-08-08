@@ -288,6 +288,7 @@ nav {
     box-shadow: 0px 0px 12px 0px #00000012;
     border-radius:12px;
     border:1px solid #DADADA;
+    overflow:hidden;
 }
 .golf-club__item .golf-club__item__top {
     width:100%;
@@ -296,6 +297,8 @@ nav {
 }
 .golf-club__item .golf-club__item__top img {
     width:100%;
+    height:100%;
+    object-fit:cover;
 }
 .golf-club__item .golf-club__item__btm {
     padding:16px;
